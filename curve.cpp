@@ -2,7 +2,7 @@
 
 Point2::Point2(): x(0), y(0) {}
 
-Point2::Point2(float x, float y): x(x), y(y) {}
+Point2::Point2(double x, double y): x(x), y(y) {}
     
 double Point2::distance2(const Point2 &other) {
     return (this->x-other.x)*(this->x-other.x) 

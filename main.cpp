@@ -1,23 +1,22 @@
-#include "curve.h"
-#include "bezie.h"
+#include "alg.h"
+#include "time.h"
 
 int main(int argc, char** argv) {
-    BezieCurve2 curve({
-        Point2(0,0),
-        Point2(1,2),
-        Point2(0,-1),
-    });
+    srand(time(NULL));
 
-    double t;
+    Image img("img.jpg", 3);
 
-    t = 0;
-    std::cout << t << ": " << curve(t) << std::endl;
-    
-    t = 1.0/2.0;
-    std::cout << t << ": " << curve(t) << std::endl;
-    
-    t = 1;
-    std::cout << t << ": " << curve(t) << std::endl;
-    
+    std::cout << "Image loaded: " << img.width << " x " << img.height << " x " << img.channels << " channels" << std::endl;
+
+    double epsilon = 1e-3;
+    for (double u=0.0; u < 1.0/2.0; u += epsilon/2) {
+        for (double v=1/2; v < 3.0/4.0; v += epsilon) {
+            // std::cout << u << " " << v << std::endl;
+            set_color_at_uv(img, Point2(u,v), ColorRGBA(0.5, 0.5, 0.5));
+        }
+    }
+
+    img.save_jpg("out.jpg");
+
     return 0;
 }

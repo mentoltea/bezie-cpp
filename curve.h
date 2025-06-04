@@ -10,7 +10,7 @@ struct Point2 {
     double x, y;
     
     Point2();
-    Point2(float x, float y);
+    Point2(double x, double y);
     
     double distance2(const Point2 &other = Point2(0,0));
     double distance(const Point2 &other = Point2(0,0));
