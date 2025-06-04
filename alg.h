@@ -40,23 +40,37 @@ void set_color_at_uv(Image &img, Point2 uv, ColorRGBA clr);
 
 
 std::vector<BezieCurve2> generate_curves(const Image &img, int p_count, int crv_count, 
+    float MIDDLEPIXEL_DEVIATION,
     float ENDPIXEL_DEVIATION
 );
 
 ColorRGBA get_color_from_crv(const Image &img, Curve2 &crv, int SAMPLES=100);
 
+
+// COLOR_MERGE - koef to merge color with current sample
+// k*given + (1-k)*current
+//
+// COLOR_DEVIATION - multiply to random color shift
+//
+// COLOR_STRENGTH - koef to pass to add_line
+// the bigger - the more it affects on surface
+// if 1 - just paints solid color
+// if 0 - does not paint anything
 void draw_curve(Image &img, Curve2 &crv, ColorRGBA base_clr, float width,
     float COLOR_MERGE,
     float COLOR_DEVIATION,
+    float COLOR_STRENGTH,
     int SAMPLES=100);
 
 
 Image algorythm(const Image &original,
     int CURVE_COUNT_PER_10x10,
     int THREADS_COUNT,
+    float MIDDLEPIXEL_DEVIATION,
     float ENDPIXEL_DEVIATION,
     float COLOR_MERGE,
     float COLOR_DEVIATION,
+    float COLOR_STRENGTH,
     float BASE_WIDTH,
     float WIDTH_DEVIATION
 );

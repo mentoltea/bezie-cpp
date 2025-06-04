@@ -22,6 +22,8 @@ double pow_i(double x, unsigned long n) {
     return p;
 }
 
+BezieCurve2::BezieCurve2() {}
+
 BezieCurve2::BezieCurve2(std::initializer_list<Point2> list): points(list) {}
     
 BezieCurve2::BezieCurve2(std::vector<Point2> &list): points(list) {}
