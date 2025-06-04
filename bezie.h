@@ -7,6 +7,8 @@
 
 unsigned long C(unsigned int n, unsigned int k);
 
+double pow_id(double x, unsigned long n);
+
 class BezieCurve2: public Curve2 {
     std::vector<Point2> points;
 public:

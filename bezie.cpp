@@ -14,10 +14,10 @@ unsigned long C(unsigned int n, unsigned int k) {
     return p;
 }
 
-double pow_i(double x, unsigned long n) {
+double pow_id(double x, unsigned long n) {
     double p = 1;
     for (unsigned long i=1; i<=n; i++) {
-        p *= x;
+        p = p*x;
     }
     return p;
 }
@@ -33,7 +33,8 @@ Point2 BezieCurve2::operator()(double t) {
     Point2 s;
     unsigned long n = this->points.size()-1;
     for (unsigned long k=0; k<=n; k++) {
-        s += (double)C(n, k) * this->points[k]  * pow_i(t, n-k) * pow_i(1-t, k);
+        // std::cout << k << ": " << points[k] << std::endl;
+        s += this->points[k] * (double)C(n, k)  * pow_id(t, n-k) * pow_id(1-t, k);
         // std::cout << s << std::endl;
     }
     return s;

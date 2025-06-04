@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <math.h>
 #include <fstream>
+#include <cstdint>
 
 struct Point2 {
     double x, y;
@@ -33,8 +34,15 @@ Point2 operator*(double k, const Point2 &other);
 
 std::ostream& operator<<(std::ostream& os, const Point2& p);
 
+struct CurveMetainfo {
+    // last 2 - for x ( < & >)
+    // next 2 - for y ( < & >)
+    uint8_t quarter = 0b0000;
+};
+
 class Curve2 {
 public:
+    CurveMetainfo meta;
     virtual Point2 operator()(double t) = 0;
 };
 

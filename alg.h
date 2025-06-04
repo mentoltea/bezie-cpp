@@ -38,14 +38,35 @@ ColorRGBA get_color_at_uv(const Image &img, Point2 uv);
 void set_color_at_uv(Image &img, Point2 uv, ColorRGBA clr);
 
 
-
-std::vector<BezieCurve2> generate_curves(const Image &img, int p_count, int crv_count, 
+BezieCurve2 generate_curve(
+    int p_count,  
     float MIDDLEPIXEL_DEVIATION,
     float ENDPIXEL_DEVIATION
 );
 
+std::vector<BezieCurve2> generate_curves(
+    int crv_count, int p_count,  
+    float MIDDLEPIXEL_DEVIATION,
+    float ENDPIXEL_DEVIATION
+);
+
+void generate_curves_into_array(
+    BezieCurve2 *arr, 
+    int crv_count, int p_count,  
+    float MIDDLEPIXEL_DEVIATION,
+    float ENDPIXEL_DEVIATION
+);
+
+
 ColorRGBA get_color_from_crv(const Image &img, Curve2 &crv, int SAMPLES=100);
 
+void get_colors_from_bcrvs_array_to_array(
+    const Image &img, 
+    BezieCurve2 *crvs,
+    ColorRGBA *clrs,
+    int count,
+    int SAMPLES=100
+);
 
 // COLOR_MERGE - koef to merge color with current sample
 // k*given + (1-k)*current
@@ -63,16 +84,27 @@ void draw_curve(Image &img, Curve2 &crv, ColorRGBA base_clr, float width,
     int SAMPLES=100);
 
 
-Image algorythm(const Image &original,
-    int CURVE_COUNT_PER_10x10,
+Image algorythm(
+    const Image &original, 
+    bool verbose,
+
     int THREADS_COUNT,
+
+    int CURVE_COUNT_PER_10x10,
+    
+    int P_COUNT,
     float MIDDLEPIXEL_DEVIATION,
     float ENDPIXEL_DEVIATION,
+    
     float COLOR_MERGE,
     float COLOR_DEVIATION,
     float COLOR_STRENGTH,
+    
     float BASE_WIDTH,
-    float WIDTH_DEVIATION
+    float WIDTH_DEVIATION,
+
+    int COLLECT_SAMPLES = 100,
+    int DRAW_SAMPLES = 50
 );
 
 

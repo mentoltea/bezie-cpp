@@ -5,24 +5,27 @@ int main(int argc, char** argv) {
     srand(time(NULL));
 
     Image img("img.jpg", 3);
-
     std::cout << "Image loaded: " << img.width << " x " << img.height << " x " << img.channels << " channels" << std::endl;
 
-    BezieCurve2 crv({
-        Point2(0,0),
-        Point2(0.5,2),
-        Point2(1,0)
-    });
-
-    ColorRGBA clr(0.5, 0.1, 0.25);
-
-    draw_curve(img, crv, clr,
-        5,
-        0.2, 0.1, 0.85,
-        100
+    Image mod = algorythm(
+        img, true, 
+        4, 
+        16, 4, 
+        0.05, 0.025,
+        0.1, 0.1, 0.9,
+        7, 6,
+        50, 25
     );
+    
+    
+    // Image mod = img;
+    // BezieCurve2 crv = generate_curve(4, 0.1, 0.05);
+    // ColorRGBA clr = get_color_from_crv(mod, crv);
+    // std::cout << clr << std::endl;
+    // draw_curve(mod, crv, clr, 4, 0, 0.1, 1);
 
-    img.save_jpg("out.jpg");
+
+    mod.save_jpg("modified.jpg");
 
     return 0;
 }
